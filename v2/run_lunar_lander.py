@@ -29,7 +29,7 @@ if __name__=="__main__":
     model = nnmodel(10)
     tr = 0
     prev_r = 0
-    training_thr = 10000
+    training_thr = 5000
     total_itrs = 50000
     successful_steps = []
 
