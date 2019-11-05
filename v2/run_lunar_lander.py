@@ -47,7 +47,7 @@ if __name__=="__main__":
             model.fit(np.array(X_train),np.array(y_train).reshape(len(y_train),1), epochs = 5, batch_size=50)
 
         if modelTrained:
-            a_candidates = np.random.uniform(low = -1, high = 1, size = batch_size, 2))
+            a_candidates = np.random.uniform(low = -1, high = 1, size = (batch_size, 2))
             s_expanded = np.broadcast_to(new_s, (batch_size, 8))
             all_candidates = np.concatenate([s_expanded, a_candidates], axis = 1)
             r_pred = model.predict(all_candidates)
@@ -102,7 +102,7 @@ if __name__=="__main__":
         new_s, r, done, info = env.step(a)
 
         if modelTrained:
-            a_candidates = np.random.uniform(low = -1, high = 1, size = batch_size, 2))
+            a_candidates = np.random.uniform(low = -1, high = 1, size = (batch_size, 2))
             s_expanded = np.broadcast_to(new_s, (batch_size, 8))
             all_candidates = np.concatenate([s_expanded, a_candidates], axis = 1)
             r_pred = model.predict(all_candidates)
