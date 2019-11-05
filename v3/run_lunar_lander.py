@@ -32,6 +32,7 @@ if __name__=="__main__":
     training_thr = 5000
     total_itrs = 50000
     successful_steps = []
+    batch = 50
 
     while steps <= total_itrs:
         new_s, r, done, info = env.step(a)
@@ -44,11 +45,11 @@ if __name__=="__main__":
             # re-train a model
             print("training model model")
             modelTrained = True
-            model.fit(np.array(X_train),np.array(y_train).reshape(len(y_train),1), epochs = 10, batch_size=50)
+            model.fit(np.array(X_train),np.array(y_train).reshape(len(y_train),1), epochs = 10, batch_size=batch)
 
         if modelTrained:
-            a_candidates = np.random.uniform(low = -1, high = 1, size = (batch_size, 2))
-            s_expanded = np.broadcast_to(new_s, (batch_size, 8))
+            a_candidates = np.random.uniform(low = -1, high = 1, size = (batch, 2))
+            s_expanded = np.broadcast_to(new_s, (batch, 8))
             all_candidates = np.concatenate([s_expanded, a_candidates], axis = 1)
             r_pred = model.predict(all_candidates)
             
@@ -97,13 +98,14 @@ if __name__=="__main__":
     tr = 0
     prev_r = 0
     total_itrs = 1000
+    batch = 50
     while steps <= total_itrs:
 
         new_s, r, done, info = env.step(a)
 
         if modelTrained:
-            a_candidates = np.random.uniform(low = -1, high = 1, size = (batch_size, 2))
-            s_expanded = np.broadcast_to(new_s, (batch_size, 8))
+            a_candidates = np.random.uniform(low = -1, high = 1, size = (batch, 2))
+            s_expanded = np.broadcast_to(new_s, (batch, 8))
             all_candidates = np.concatenate([s_expanded, a_candidates], axis = 1)
             r_pred = model.predict(all_candidates)
             
