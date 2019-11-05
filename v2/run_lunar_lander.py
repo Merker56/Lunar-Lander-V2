@@ -40,11 +40,11 @@ if __name__=="__main__":
 
         # This 'if' statement determines how often your model is re-trained
 
-        if steps > training_thr and steps %1000 ==0:
+        if steps > training_thr and steps %2000 ==0:
             # re-train a model
             print("training model model")
             modelTrained = True
-            model.fit(np.array(X_train),np.array(y_train).reshape(len(y_train),1), epochs = 10, batch_size=20)
+            model.fit(np.array(X_train),np.array(y_train).reshape(len(y_train),1), epochs = 5, batch_size=50)
 
         if modelTrained:
             a_candidates = np.random.uniform(low = -1, high = 1, size = batch_size, 2))
